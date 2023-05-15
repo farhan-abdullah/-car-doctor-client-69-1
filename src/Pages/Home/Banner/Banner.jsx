@@ -7,7 +7,7 @@ import img5 from './../../../assets/images/banner/5.jpg';
 import img6 from './../../../assets/images/banner/6.jpg';
 const Banner = () => {
 	return (
-		<div className='carousel w-4/5 h-[550px] mx-auto rounded-lg'>
+		<div className='carousel w-full h-[550px] mx-auto rounded-lg mb-16 mt-10'>
 			<div id='slide1' className='carousel-item relative w-full'>
 				<img src={img1} className='w-full ' />
 				<div className='absolute h-full flex-col space-y-7 p-10 items-center transform bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0) ] '>
