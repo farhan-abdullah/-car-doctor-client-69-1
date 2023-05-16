@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import img from '../../assets/images/login/login.svg';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 const Login = () => {
+	const { signIn } = useContext(AuthContext);
 	const handleLogin = (event) => {
 		event.preventDefault();
+		const form = event.target;
+		const email = form.email.value;
+		const password = form.password.value;
+		signIn(email, password)
+			.then((res) => {
+				const loggedUser = res.user;
+				console.log(loggedUser);
+			})
+			.catch((e) => {
+				console.log(e.message);
+			});
 	};
 	return (
 		<div className='hero min-h-screen'>
