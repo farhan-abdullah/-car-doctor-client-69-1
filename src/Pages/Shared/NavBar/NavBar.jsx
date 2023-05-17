@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
+
 const NavBar = () => {
+	const { user } = useContext(AuthContext);
 	const navItems = (
 		<>
 			<li>
@@ -14,7 +17,7 @@ const NavBar = () => {
 				<a>Services</a>
 			</li>
 			<li>
-				<a>Privacy</a>
+				<Link to='bookings/'>My booking</Link>
 			</li>
 		</>
 	);
