@@ -17,9 +17,24 @@ const Checkout = () => {
 			surname,
 			email,
 			number,
-			service: service._id,
+			service: service.title,
+			service_id: service._id,
 		};
 		console.log(order);
+		fetch('http://localhost:5000/bookings', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify(order),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				if (data.insertedId) {
+					alert('service book successfully');
+				}
+			});
 	};
 	return (
 		<div>
