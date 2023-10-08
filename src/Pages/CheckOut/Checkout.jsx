@@ -5,6 +5,8 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 const Checkout = () => {
 	const service = useLoaderData();
 	const { user } = useContext(AuthContext);
+
+	const { title, _id, price, img } = service;
 	const handleBookService = (event) => {
 		event.preventDefault();
 		const form = event.target;
@@ -13,12 +15,13 @@ const Checkout = () => {
 		const number = form.number.value;
 		const email = form.email.value;
 		const order = {
-			customerName: name,
-			surname,
+			name,
 			email,
 			number,
-			service: service.title,
-			service_id: service._id,
+			img,
+			price,
+			service: title,
+			service_id: _id,
 		};
 		console.log(order);
 		fetch('http://localhost:5000/bookings', {

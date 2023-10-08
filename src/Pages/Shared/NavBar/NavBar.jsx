@@ -1,10 +1,20 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const NavBar = () => {
-	const { user } = useContext(AuthContext);
+	const { user, logOut } = useContext(AuthContext);
+
+	const handleLogOut = () => {
+		logOut()
+			.then(() => {
+				//after logout remove jwt token
+				localStorage.removeItem('car-access-token');
+			})
+			.catch((error) => console.log(error));
+	};
+
 	const navItems = (
 		<>
 			<li>
@@ -13,12 +23,30 @@ const NavBar = () => {
 			<li>
 				<a>About</a>
 			</li>
-			<li>
-				<a>Services</a>
-			</li>
-			<li>
-				<Link to='bookings/'>My booking</Link>
-			</li>
+			{user ? (
+				''
+			) : (
+				<>
+					<li>
+						<Link to={'/login'}>Login</Link>
+					</li>
+					<li>
+						<Link to='/signup'>Registration</Link>
+					</li>
+				</>
+			)}
+			{user && (
+				<>
+					<li>
+						<Link to='bookings/'>My booking</Link>
+					</li>
+					<li>
+						<button className='btn' onClick={handleLogOut}>
+							Logout
+						</button>
+					</li>
+				</>
+			)}
 		</>
 	);
 	return (
